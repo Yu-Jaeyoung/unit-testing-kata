@@ -1,0 +1,19 @@
+{
+  "name": "typescript",
+  "version": "1.0.0",
+  "module": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "start": "bun run src/index.ts",
+    "dev": "bun --watch src/index.ts",
+    "build": "bun build src/index.ts --outdir ./dist --target=bun",
+    "test": "bun test",
+    "lint": "bun biome lint --write ./src",
+    "format": "bun biome format --write ./src"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.1.1",
+    "typescript": "^5.8.3",
+    "@types/bun": "^1.2.18"
+  }
+}
