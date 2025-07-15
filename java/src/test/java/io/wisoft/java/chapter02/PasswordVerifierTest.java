@@ -11,9 +11,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("PasswordVerifier Test")
 class PasswordVerifierTest {
 
-    PasswordValidationRule failingRule = input -> new ValidationResult(false, "fake reason");
-    PasswordValidationRule passingRule = input -> new ValidationResult(true, "");
-
     @Nested
     @DisplayName("When a rule fails")
     class FailingRuleScenario {
@@ -21,7 +18,9 @@ class PasswordVerifierTest {
         @Test
         @DisplayName("has an error message based on the rule's reason")
         void hasErrorMessageBasedOnRuleReason() {
-            PasswordVerifier verifier = new PasswordVerifier(List.of(failingRule));
+            PasswordVerifier verifier = new PasswordVerifier();
+
+            verifier.addRules(failingRule);
 
             List<String> errors = verifier.verifyPassword("any value");
 
@@ -32,7 +31,9 @@ class PasswordVerifierTest {
         @Test
         @DisplayName("has exactly one error")
         void hasExactlyOneError() {
-            PasswordVerifier verifier = new PasswordVerifier(List.of(failingRule));
+            PasswordVerifier verifier = new PasswordVerifier();
+
+            verifier.addRules(failingRule);
 
             List<String> errors = verifier.verifyPassword("any value");
 
@@ -47,7 +48,9 @@ class PasswordVerifierTest {
         @Test
         @DisplayName("should return no errors")
         void shouldReturnNoErrors() {
-            PasswordVerifier verifier = new PasswordVerifier(List.of(passingRule));
+            PasswordVerifier verifier = new PasswordVerifier();
+
+            verifier.addRules(passingRule);
 
             List<String> errors = verifier.verifyPassword("validPassword123");
 
@@ -57,7 +60,10 @@ class PasswordVerifierTest {
         @Test
         @DisplayName("should handle multiple passing rules")
         void shouldHandleMultiplePassingRules() {
-            PasswordVerifier verifier = new PasswordVerifier(List.of(passingRule, passingRule));
+            PasswordVerifier verifier = new PasswordVerifier();
+
+            verifier.addRules(passingRule);
+            verifier.addRules(passingRule);
 
             List<String> errors = verifier.verifyPassword("validPassword123");
 
@@ -68,11 +74,15 @@ class PasswordVerifierTest {
     @Nested
     @DisplayName("When a mix of passing and failing rules exist")
     class MixedRulesScenario {
+
         @Test
         @DisplayName("should return only errors from failing rules")
         void shouldReturnOnlyErrorsFromFailingRules() {
-            PasswordValidationRule anotherFailingRule = input -> new ValidationResult(false, "another fake reason");
-            PasswordVerifier verifier = new PasswordVerifier(List.of(passingRule, failingRule, anotherFailingRule, passingRule));
+            PasswordVerifier verifier = new PasswordVerifier();
+
+            verifier.addRules(failingRule);
+            verifier.addRules(passingRule);
+            verifier.addRules(anotherFailingRule);
 
             List<String> errors = verifier.verifyPassword("any value");
 
@@ -80,4 +90,8 @@ class PasswordVerifierTest {
             assertThat(errors).containsExactlyInAnyOrder("error fake reason", "error another fake reason");
         }
     }
+
+    PasswordValidationRule failingRule = input -> new ValidationResult(false, "fake reason");
+    PasswordValidationRule passingRule = input -> new ValidationResult(true, "");
+    PasswordValidationRule anotherFailingRule = input -> new ValidationResult(false, "another fake reason");
 }
