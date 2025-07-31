@@ -1,4 +1,4 @@
-interface PasswordRuleResult {
+export interface PasswordRuleResult {
   passed: boolean;
   reason: string;
 }
