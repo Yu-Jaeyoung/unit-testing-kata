@@ -59,3 +59,11 @@ test("pass verifier, with passing and failing rule, error text belongs to failed
   expect(errors[0])
     .toContain("fake reason");
 });
+
+test("verify, with no rules, throws exception", () => {
+  const verifier = makeVerifier();
+  expect(() => verifier.verify("any input"))
+    .toThrow(
+      /no rules configured/,
+    );
+});

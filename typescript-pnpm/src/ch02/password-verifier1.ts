@@ -12,6 +12,10 @@ export class PasswordVerifier1 {
   verify (input: string) {
     const errors: string[] = [];
 
+    if (this.rules.length === 0) {
+      throw new Error("There are no rules configured");
+    }
+
     this.rules.forEach(rule => {
       const result = rule(input);
 
