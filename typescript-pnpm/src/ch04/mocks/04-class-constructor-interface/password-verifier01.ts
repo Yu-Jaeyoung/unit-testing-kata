@@ -1,12 +1,13 @@
 import { ILogger } from "./interfaces/logger";
+import { IComplicatedLogger } from "./interfaces/complicated-logger";
 
-export class PasswordVerifier {
+export class PasswordVerifier2 {
   private _rules: PasswordRule[];
   private _logger: ILogger;
 
   constructor(
     rules: PasswordRule[],
-    logger: ILogger,
+    logger: IComplicatedLogger,
   ) {
     this._rules = rules;
     this._logger = logger;

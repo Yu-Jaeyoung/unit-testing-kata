@@ -1,4 +1,4 @@
-import { ILogger } from "./interface/logger";
+import { ILogger } from "./interfaces/logger";
 import { PasswordVerifier } from "./password-verifier00";
 
 class FakeLogger implements ILogger {
