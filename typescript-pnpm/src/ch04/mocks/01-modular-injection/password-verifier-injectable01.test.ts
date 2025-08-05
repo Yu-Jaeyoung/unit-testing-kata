@@ -1,22 +1,28 @@
-import { injectDependencies, verifyPassword } from "./password-verifier-injectable01";
+import { injectDependencies, restDependencies, verifyPassword } from "./password-verifier-injectable01";
 
-describe("given logger and passing scenario", () => {
-  it("calls the logger with PASS", ()=> {
-    let logged = "";
+describe("password verifier", () => {
 
-    const mockLog = {
-      info: (text: string) => {
-        logged = text;
-      },
-      debug: (text: string) => {
-        logged = text;
-      },
-    };
+  afterEach(restDependencies);
 
-    injectDependencies({ log: mockLog });
+  describe("given logger and passing scenario", () => {
+    it("calls the logger with PASS", () => {
+      let logged = "";
 
-    verifyPassword("anything", []);
+      const mockLog = {
+        info: (text: string) => {
+          logged = text;
+        },
+        debug: (text: string) => {
+          logged = text;
+        },
+      };
 
-    expect(logged).toMatch(/PASSED/);
+      injectDependencies({ log: mockLog });
+
+      verifyPassword("anything", []);
+
+      expect(logged)
+        .toMatch(/PASSED/);
+    });
   });
 });
