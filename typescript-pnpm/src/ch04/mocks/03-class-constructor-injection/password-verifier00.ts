@@ -16,7 +16,7 @@ export class PasswordVerifier {
   verify(input: string) {
     const failed = this._rules
                        .map(rule => rule(input))
-                       .filter(result => result === false);
+                       .filter(result => !result.passed);
 
     if (failed.length === 0) {
       this._logger.info("PASSED");

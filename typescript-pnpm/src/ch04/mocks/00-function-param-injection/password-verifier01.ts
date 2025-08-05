@@ -7,7 +7,7 @@ export const verifyPassword2 = (
 ) => {
   const failed = rules
     .map(rule => rule(input))
-    .filter(result => result === false);
+    .filter(result => !result.passed);
 
   if (failed.length === 0) {
     logger.info("PASSED");
