@@ -1,6 +1,4 @@
-import moment from "moment";
-
-const SUNDAY = 0, MONDAY = 1, SATURDAY = 6;
+const SUNDAY = 0, SATURDAY = 6;
 
 export const verifyPassword2 = (
   input: string,
