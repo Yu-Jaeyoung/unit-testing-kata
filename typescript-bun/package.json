@@ -12,11 +12,13 @@
     "format": "bun biome format --write ./src"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.1.2",
+    "@biomejs/biome": "^2.1.3",
     "@types/bun": "^1.2.19",
-    "typescript": "^5.8.3"
+    "typescript": "^5.9.2"
   },
   "dependencies": {
+    "@types/lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "moment": "^2.30.1"
   }
 }
