@@ -12,6 +12,7 @@
   "packageManager": "pnpm@10.13.1",
   "devDependencies": {
     "@fluffy-spoon/substitute": "^1.208.0",
+    "@testing-library/dom": "^10.4.1",
     "@types/jest": "^30.0.0",
     "@types/lodash": "^4.17.20",
     "@types/node": "^24.3.3",
