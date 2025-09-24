@@ -2,7 +2,7 @@ import * as webVerifier from "./website-verifier";
 
 const makeStubNetworkWithResult = (fakeResult: { ok: boolean; text: string; }) => {
   return {
-    fetchUrlText: () => {
+    fetchUrlText: async () => {
       return fakeResult;
     },
   };

@@ -1,4 +1,6 @@
-export const isWebsiteAlive = async(network: { fetchUrlText: (arg: string) => { ok: boolean, text: string }; }) => {
+import { Network } from "./network-adapter";
+
+export const isWebsiteAlive = async(network: typeof Network) => {
   const result = await network.fetchUrlText("http://example.com");
 
   if (result.ok) {
@@ -11,9 +13,11 @@ export const isWebsiteAlive = async(network: { fetchUrlText: (arg: string) => { 
 
 const onFetchSuccess = (text: string) => {
   const included = text.includes("illustrative");
+
   if (included) {
     return { success: true, status: "ok" };
   }
+
   return { success: false, status: "missing text" };
 };
 

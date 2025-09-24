@@ -1,6 +1,6 @@
 import fetch, { Response } from "node-fetch";
 
-export const fetchUrlText = async(url: string) => {
+const fetchUrlText = async(url: string) => {
   const resp: Response = await fetch(url);
 
   if (resp.ok) {
@@ -9,4 +9,8 @@ export const fetchUrlText = async(url: string) => {
   }
 
   return { ok: false, text: resp.statusText };
+};
+
+export const Network = {
+  fetchUrlText,
 };
